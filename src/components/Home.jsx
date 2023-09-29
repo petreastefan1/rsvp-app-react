@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import Card from  "./Card"
 function Home() {
 
@@ -27,7 +27,22 @@ function Home() {
         }
 
     ])
+    const inputRef = useRef();
 
+    let handleAdd=(event)=>{
+
+     let newUser =   {
+            name:inputRef.current.value,
+            id: Math.floor(Math.random()*100)
+        }
+
+
+        setUsers((prev)=>{
+
+            return [...prev,newUser];
+        })
+
+    }
 
 
 
@@ -49,8 +64,8 @@ function Home() {
                     </div>
                 </div>
                 <div className="search-container">
-                    <input type="textbox" placeholder="Invite someone" id="name-inpt"/>
-                    <button id="submit-btn">Submit</button>
+                    <input ref={inputRef} type="textbox" placeholder="Invite someone" id="name-inpt" />
+                    <button onClick={handleAdd} id="submit-btn">Submit</button>
 
                 </div>
             </div>
